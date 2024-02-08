@@ -18,25 +18,28 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td class="text-center">id</td>
-                    <td>name</td>
-                    <td class="text-center">Rp. 20.000.000</td>
-                    <td class="text-center">
-                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
-                            data-target="#positionModal" data-action="edit" data-id="id" data-name="name"
-                            data-salary="20.000.000">
-                            Edit
-                        </button>
-                        {{-- <form action="{{ route('divisions.destroy', $division->id) }}" method="post"
-                            style="display:inline;">
-                            @csrf
-                            @method('DELETE') --}}
-                        <button type="submit" class="btn btn-sm btn-danger"
-                            onclick="return confirm('Apakah anda yakin menghapus data ini?')">Hapus</button>
-                        {{-- </form> --}}
-                    </td>
-                </tr>
+                @foreach ($positions as $position)
+                    <tr>
+                        <td class="text-center">{{ $loop->iteration }}</td>
+                        <td>{{ $position->division->name }} - {{ $position->name }}</td>
+                        <td class="text-center">Rp. {{ number_format($position->salary_per_hour) }}</td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
+                                data-target="#positionModal" data-action="edit"
+                                data-id="{{ $position->id }} data-divisi="{{ $position->division_id }}"
+                                data-name="{{ $position->name }}" data-salary="{{ $position->salary_per_hour }}">
+                                Edit
+                            </button>
+                            <form action="{{ route('jabatan.destroy', $position->id) }}" method="post"
+                                style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger"
+                                    onclick="return confirm('Apakah anda yakin menghapus data ini?')">Hapus</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
 
@@ -51,7 +54,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form id="divisionForm" action="" method="post">
+                        <form id="divisionForm" action="{{ route('jabatan.store') }}" method="post">
                             @csrf
                             <input type="hidden" name="_method" id="method" value="POST">
                             <input type="hidden" name="position_id" id="position_id" value="">
@@ -59,9 +62,22 @@
                                 <label for="name">Jabatan</label>
                                 <input type="text" class="form-control" id="name" name="name" required>
                             </div>
-                            <div class="form-group">
-                                <label for="name">Gaji/Jam</label>
+                            <div class="form-group mb-3">
+                                <label for="salary">Gaji/Jam</label>
                                 <input type="text" class="form-control" id="salary" name="salary_per_hour" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="divisi">Divisi</label>
+                                <select class="form-select" aria-label="Default select example" id="divisi"
+                                    name="division_id" value>
+                                    <option selected>Pilih Divisi</option>
+
+                                    @foreach ($divisions as $division)
+                                        <option value="{{ $division->id }}"
+                                            {{ $division->id == old('division_id', $position->division_id) ? 'selected' : '' }}>
+                                            {{ $division->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <button type="submit" class="btn btn-primary mt-3">Simpan</button>
                         </form>
@@ -85,23 +101,26 @@
 
                     // Set form method and action for edit
                     modal.find('#method').val('PUT');
-                    modal.find('#divisionForm').attr('action', '/divisions/' + button.data('id'));
+                    modal.find('#divisionForm').attr('action', '/jabatan/update/' + button.data('id'));
 
                     // Set division name in the form for edit
                     modal.find('#name').val(button.data('name'));
                     modal.find('#salary').val(button.data('salary'));
+                    let divisiId = button.data('divisi_id');
+                    modal.find('#divisi_id').val(divisiId).change();
                 } else {
                     // Set modal title for add
                     modal.find('.modal-title').text('Tambah Jabatan');
 
                     // Set form method and action for add
                     modal.find('#method').val('POST');
-                    modal.find('#divisionForm').attr('action', '/position');
+                    modal.find('#divisionForm').attr('action', '/jabatan/store');
 
                     // Clear the form for add
                     modal.find('#position_id').val('');
                     modal.find('#name').val('');
                     modal.find('#salary').val('');
+                    modal.find('#division').val('');
                 }
             });
 
@@ -111,6 +130,7 @@
                 $(this).find('#position_id').val('');
                 $(this).find('#name').val('');
                 $(this).find('#salary').val('');
+                $(this).find('#division').val('');
             });
         });
     </script>

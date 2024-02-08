@@ -10,4 +10,8 @@ class Division extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function position() {
+        return $this->hasMany(Position::class);
+    }
 }

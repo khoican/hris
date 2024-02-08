@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DivisionController;
+use App\Http\Controllers\PositionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -27,15 +28,19 @@ Route::get('/karyawan/create', function () {
 Route::get('/absensi', function () {
     return view('pages.admin.attendence.index');
 });
-Route::get('/jabatan', function () {
-    return view('pages.admin.position.index');
-});
 
 Route::group(['prefix' => 'divisi'], function() {
     Route::get('/', [DivisionController::class, 'index'])->name('divisi');
     Route::post('store', [DivisionController::class, 'store'])->name('divisi.store');
     Route::put('update/{id}', [DivisionController::class, 'update'])->name('divisi.update');
     Route::delete('destroy/{id}', [DivisionController::class, 'destroy'])->name('divisi.destroy');
+});
+
+Route::group(['prefix' => 'jabatan'], function() {
+    Route::get('/', [PositionController::class, 'index'])->name('jabatan');
+    Route::post('store', [PositionController::class, 'store'])->name('jabatan.store');
+    Route::put('update/{id}', [PositionController::class, 'update'])->name('jabatan.update');
+    Route::delete('destroy/{id}', [PositionController::class, 'destroy'])->name('jabatan.destroy');
 });
 
 Auth::routes();
