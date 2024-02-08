@@ -21,7 +21,8 @@
             </button>
             <div class="collapse" id="dashboard-collapse" style="">
                 <ul class="btn-toggle-nav list-unstyled fw-normal ps-3">
-                    <li><a href="#" class="nav-link text-white rounded">Jabatan</a></li>
+                    <li><a href="/divisi" class="nav-link text-white rounded">Divisi</a></li>
+                    <li><a href="/jabatan" class="nav-link text-white rounded">Jabatan</a></li>
                 </ul>
             </div>
         </li>

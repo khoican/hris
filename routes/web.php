@@ -26,5 +26,11 @@ Route::get('/karyawan/create', function () {
 Route::get('/absensi', function () {
     return view('pages.admin.attendence.index');
 });
+Route::get('/divisi', function () {
+    return view('pages.admin.division.index');
+});
+Route::get('/jabatan', function () {
+    return view('pages.admin.position.index');
+});
 
 Auth::routes();
