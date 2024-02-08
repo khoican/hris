@@ -17,23 +17,25 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td class="text-center">id</td>
-                    <td>name</td>
-                    <td class="text-center">
-                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
-                            data-target="#divisionModal" data-action="edit" data-id="id" data-name="name">
-                            Edit
-                        </button>
-                        {{-- <form action="{{ route('divisions.destroy', $division->id) }}" method="post"
-                            style="display:inline;">
-                            @csrf
-                            @method('DELETE') --}}
-                        <button type="submit" class="btn btn-sm btn-danger"
-                            onclick="return confirm('Apakah anda yakin menghapus data ini?')">Hapus</button>
-                        {{-- </form> --}}
-                    </td>
-                </tr>
+                @foreach ($divisions as $division)
+                    <tr>
+                        <td class="text-center fw-bold">{{ $loop->iteration }}</td>
+                        <td>{{ $division->name }}</td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
+                                data-target="#divisionModal" data-action="edit" data-id="{{ $division->id }}"
+                                data-name="{{ $division->name }}">
+                                Edit
+                            </button>
+                            <form action="{{ route('divisi.destroy', $division->id) }}" method="post"
+                                style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger"
+                                    onclick="return confirm('Apakah anda yakin menghapus data ini?')">Hapus</button>
+                            </form>
+                        </td>
+                    </tr @endforeach
             </tbody>
         </table>
 
@@ -48,7 +50,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form id="divisionForm" action="" method="post">
+                        <form id="divisionForm" action="{{ route('divisi.store') }}" method="post">
                             @csrf
                             <input type="hidden" name="_method" id="method" value="POST">
                             <input type="hidden" name="division_id" id="division_id" value="">
@@ -68,9 +70,9 @@
         $(document).ready(function() {
             // Handle modal show event
             $('#divisionModal').on('show.bs.modal', function(event) {
-                var button = $(event.relatedTarget);
-                var action = button.data('action');
-                var modal = $(this);
+                let button = $(event.relatedTarget);
+                let action = button.data('action');
+                let modal = $(this);
 
                 if (action === 'edit') {
                     // Set modal title for edit
@@ -78,7 +80,8 @@
 
                     // Set form method and action for edit
                     modal.find('#method').val('PUT');
-                    modal.find('#divisionForm').attr('action', '/divisions/' + button.data('id'));
+                    let updateUrl = '/divisi/update/' + button.data('id');
+                    modal.find('#divisionForm').attr('action', updateUrl);
 
                     // Set division name in the form for edit
                     modal.find('#name').val(button.data('name'));
@@ -88,7 +91,7 @@
 
                     // Set form method and action for add
                     modal.find('#method').val('POST');
-                    modal.find('#divisionForm').attr('action', '/divisions');
+                    modal.find('#divisionForm').attr('action', '/divisi/store');
 
                     // Clear the form for add
                     modal.find('#division_id').val('');
