@@ -17,7 +17,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('pages.admin.dashboard');
 });
+Route::get('/karyawan', function () {
+    return view('pages.admin.employee.index');
+});
+Route::get('/karyawan/create', function () {
+    return view('pages.admin.employee.create');
+});
+Route::get('/absensi', function () {
+    return view('pages.admin.attendence.index');
+});
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

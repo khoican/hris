@@ -26,12 +26,12 @@
             </div>
         </li>
         <li>
-            <a href="#" class="nav-link text-white">
+            <a href="/karyawan" class="nav-link text-white">
                 Karyawan
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link text-white">
+            <a href="/absensi" class="nav-link text-white">
                 Absensi
             </a>
         </li>
