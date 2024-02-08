@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DivisionController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PositionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -19,14 +20,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('pages.admin.dashboard');
 });
-Route::get('/karyawan', function () {
-    return view('pages.admin.employee.index');
-});
-Route::get('/karyawan/create', function () {
-    return view('pages.admin.employee.create');
-});
 Route::get('/absensi', function () {
     return view('pages.admin.attendence.index');
+});
+
+Route::group(['prefix' => 'karyawan'], function() {
+    Route::get('/', [EmployeeController::class, 'index'])->name('karyawan.index');
+    Route::get('create', [EmployeeController::class, 'create'])->name('karyawan.create');
+    Route::post('store', [EmployeeController::class, 'store'])->name('karyawan.store');
+    Route::get('edit/{id}', [EmployeeController::class, 'edit'])->name('karyawan.edit');
+    Route::put('update/{id}', [EmployeeController::class, 'update'])->name('karyawan.update');
+    Route::delete('destroy/{id}', [EmployeeController::class, 'destroy'])->name('karyawan.destroy');
 });
 
 Route::group(['prefix' => 'divisi'], function() {

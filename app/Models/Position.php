@@ -14,4 +14,8 @@ class Position extends Model
     public function division() {
         return $this->belongsTo(Division::class);
     }
+
+    public function employee() {
+        return $this->hasMany(Employee::class);
+    }
 }

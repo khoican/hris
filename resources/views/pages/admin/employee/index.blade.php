@@ -4,7 +4,7 @@
     <h1 class="fw-bold fs-3">Karyawan</h1>
 
     <div class="mt-5">
-        <a href="/karyawan/create" class="btn btn-primary">Tambah Karyawan</a>
+        <a href="{{ route('karyawan.create') }}" class="btn btn-primary">Tambah Karyawan</a>
     </div>
 
     <div class="w-100 p-3 bg-white rounded-3 mt-3 shadow">
@@ -19,15 +19,17 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td scope="row" class="text-center fw-bold">1</td>
-                    <td>Jhon Doe</td>
-                    <td class="text-center">Marketing</td>
-                    <td class="text-center">Manager</td>
-                    <td class="text-center">
-                        <a href="#" class="btn btn-primary btn-sm">Detail</a>
-                    </td>
-                </tr>
+                @foreach ($employees as $employee)
+                    <tr>
+                        <td scope="row" class="text-center fw-bold">{{ $loop->iteration }}</td>
+                        <td>{{ $employee->name }}</td>
+                        <td class="text-center">{{ $employee->position->division->name }}</td>
+                        <td class="text-center">{{ $employee->position->name }}</td>
+                        <td class="text-center">
+                            <a href="{{ route('karyawan.edit', $employee->id) }}" class="btn btn-primary btn-sm">Detail</a>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
