@@ -13,8 +13,11 @@ class DivisionSeeder extends Seeder
      */
     public function run(): void
     {
-        Division::create([
-            'name' => 'IT',
+        Division::insert([
+            ['name' => 'Information Technology'],
+            ['name' => 'Human Resources'],
+            ['name' => 'Designer'],
+            ['name' => 'Operational'],
         ]);
     }
 }

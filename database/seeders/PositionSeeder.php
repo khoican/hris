@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Division;
 use App\Models\Position;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class PositionSeeder extends Seeder
@@ -13,10 +13,24 @@ class PositionSeeder extends Seeder
      */
     public function run(): void
     {
-        Position::create([
-            'division_id' => 1,
-            'name' => 'Manager',
-            'salary_per_hour' => 3000000,
-        ]);
+        $divisions = Division::pluck('id')->toArray();
+
+        $positionsData = [];
+
+        foreach ($divisions as $divisionId) {
+            $positionsData[] = [
+                'name' => 'Manager',
+                'salary_per_hour' => 200000,
+                'division_id' => $divisionId,
+            ];
+
+            $positionsData[] = [
+                'name' => 'Staff',
+                'salary_per_hour' => 100000,
+                'division_id' => $divisionId,
+            ];
+        }
+
+        Position::insert($positionsData);
     }
 }

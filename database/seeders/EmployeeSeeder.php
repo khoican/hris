@@ -3,7 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Employee;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Position;
+use Faker\Factory;
 use Illuminate\Database\Seeder;
 
 class EmployeeSeeder extends Seeder
@@ -13,12 +14,17 @@ class EmployeeSeeder extends Seeder
      */
     public function run(): void
     {
-        Employee::create([
-            'position_id' => 1,
-            'name' => 'Ibnu Khoirul',
-            'email' => 'ibnukhoirul@example.com',
-            'phone' => '08123456789',
-            'address' => 'Jl. Raya no. 1',
-        ]);
+        $position = Position::pluck('id')->toArray();
+
+        $faker = Factory::create();
+        foreach (range(1, 10) as $index) {
+            Employee::insert([
+                'position_id' => $position[array_rand($position)],
+                'name' => $faker->name,
+                'email' => $faker->email,
+                'phone' => $faker->phoneNumber,
+                'address' => $faker->address,
+            ]);
+        }
     }
 }
