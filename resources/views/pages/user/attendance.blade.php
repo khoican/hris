@@ -4,14 +4,14 @@
 
     @if (session()->has('success'))
 
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <div class="alert alert-success alert-dismissible fade show position-fixed top-0 end-0 w-100" role="alert">
         <strong>Berhasil</strong> {{ session('success') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 
     @elseif (session()->has('error'))
 
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <div class="alert alert-danger alert-dismissible fade show position-fixed top-0 end-0 w-100" role="alert">
         <strong>Gagal</strong> {{ session('error') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>

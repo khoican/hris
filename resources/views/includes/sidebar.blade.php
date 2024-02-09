@@ -32,7 +32,7 @@
             </a>
         </li>
         <li>
-            <a href="/absensi" class="nav-link text-white">
+            <a href="/absen/show" class="nav-link text-white">
                 Absensi
             </a>
         </li>

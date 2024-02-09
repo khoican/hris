@@ -12,7 +12,7 @@ class AttendenceController extends Controller
         return view('pages.user.attendance');
     }
 
-    public function harvesine($userLatitude, $userLongitude) {
+    private function harvesine($userLatitude, $userLongitude) {
         $radius = 6371000;
         $mainLatitude = -8.175083422859615;
         $mainLongitude = 113.72123652843928;
@@ -77,6 +77,12 @@ class AttendenceController extends Controller
 
             if ($existingAttendance) {
                 return back()->with('error', 'You have already checked out today!');
+            }
+
+            $existingCheckIn = Attendence::where('employee_id', $employee_id)->whereDate('check_in', Carbon::today())->first();
+
+            if (!$existingCheckIn) {
+                return back()->with('error', 'Kamu belum melakukan presensi masuk, silahkan checkin kembali!');
             }
 
             $employee  = Attendence::where('employee_id', $employee_id)->whereDate('created_at', Carbon::today())->first();
