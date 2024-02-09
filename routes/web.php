@@ -1,10 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PositionController;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AttendenceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,13 @@ Route::get('/', function () {
 Route::get('/absensi', function () {
     return view('pages.admin.attendence.index');
 });
+Route::get('/presensi', function () {
+    return view('pages.user.attendance');
+});
+
+Route::get('absen', [AttendenceController::class, 'index'])->name('absen');
+Route::post('absen/store', [AttendenceController::class, 'checkin'])->name('checkin');
+Route::post('absen/update', [AttendenceController::class, 'checkout'])->name('checkout');
 
 Route::group(['prefix' => 'karyawan'], function() {
     Route::get('/', [EmployeeController::class, 'index'])->name('karyawan.index');

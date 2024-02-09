@@ -5,12 +5,12 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-            <a href="#" class="nav-link text-white" aria-current="page">
+            <a href="/presensi" class="nav-link text-white" aria-current="page">
                 Home
             </a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link active" aria-current="page">
+            <a href="/" class="nav-link active" aria-current="page">
                 Dashboard
             </a>
         </li>
