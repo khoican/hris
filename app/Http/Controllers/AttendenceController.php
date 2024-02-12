@@ -3,19 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendence;
+use App\Models\Office;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AttendenceController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         return view('pages.user.attendance');
     }
 
-    private function harvesine($userLatitude, $userLongitude) {
+    private function harvesine($userLatitude, $userLongitude)
+    {
+        $office = Office::first();
+
         $radius = 6371000;
-        $mainLatitude = -8.175083422859615;
-        $mainLongitude = 113.72123652843928;
+        $mainLatitude = $office->latitude;
+        $mainLongitude = $office->longitude;
 
         $lat1 = deg2rad($mainLatitude);
         $lon1 = deg2rad($mainLongitude);
@@ -34,7 +39,8 @@ class AttendenceController extends Controller
         return $distance;
     }
 
-    public function checkin(Request $request) {
+    public function checkin(Request $request)
+    {
         $latitude = $request->latitude;
         $longitude = $request->longitude;
 
@@ -57,13 +63,13 @@ class AttendenceController extends Controller
             ]);
 
             return back()->with('success', 'You have successfully checked in!');
-
         } else {
             return back()->with('error', 'You are too far away from the office!');
         }
     }
 
-    public function checkout(Request $request) {
+    public function checkout(Request $request)
+    {
         $latitude = $request->latitude;
         $longitude = $request->longitude;
 
@@ -72,12 +78,6 @@ class AttendenceController extends Controller
         if ($distance <= 50) {
 
             $employee_id = 1;
-
-            $existingAttendance = Attendence::where('employee_id', $employee_id)->whereDate('check_out', Carbon::today())->first();
-
-            if ($existingAttendance) {
-                return back()->with('error', 'You have already checked out today!');
-            }
 
             $existingCheckIn = Attendence::where('employee_id', $employee_id)->whereDate('check_in', Carbon::today())->first();
 
@@ -91,7 +91,6 @@ class AttendenceController extends Controller
             ]);
 
             return back()->with('success', 'You have successfully checked in!');
-
         } else {
             return back()->with('error', 'You are too far away from the office!');
         }

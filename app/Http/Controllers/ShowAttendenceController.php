@@ -21,4 +21,22 @@ class ShowAttendenceController extends Controller
 
         return view('pages.admin.attendence.index', compact('attendanceSumary'));
     }
+
+    public function filter(Request $request) {
+        $year = $request->year;
+        $month = $request->month;
+
+        $employees = Employee::all();
+
+        $attendanceSumary = [];
+        foreach($employees as $employee) {
+            $attendanceSumary[] = [
+                'employee' => $employee->name,
+                'totalAttendanceDays' => $employee->totalAttendanceDays($employee->id, $year, $month),
+                'totalAbsenceDays' => $employee->totalAbsenceDays($employee->id, $year, $month),
+            ];
+        }
+
+        return response()->json($attendanceSumary);
+    }
 }

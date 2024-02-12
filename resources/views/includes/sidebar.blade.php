@@ -21,6 +21,7 @@
             </button>
             <div class="collapse" id="dashboard-collapse" style="">
                 <ul class="btn-toggle-nav list-unstyled fw-normal ps-3">
+                    <li><a href="/kantor" class="nav-link text-white rounded">Profil Kantor</a></li>
                     <li><a href="/divisi" class="nav-link text-white rounded">Divisi</a></li>
                     <li><a href="/jabatan" class="nav-link text-white rounded">Jabatan</a></li>
                 </ul>
@@ -44,10 +45,9 @@
     </ul>
     <hr>
     <div class="dropdown">
-        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-            id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/mdo.png" alt="" width="32" height="32"
-                class="rounded-circle me-2">
+        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
             <strong>mdo</strong>
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
