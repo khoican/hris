@@ -8,6 +8,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\AttendenceController;
 use App\Http\Controllers\ShowAttendenceController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,8 @@ Route::post('absen/store', [AttendenceController::class, 'checkin'])->name('chec
 Route::post('absen/update', [AttendenceController::class, 'checkout'])->name('checkout');
 Route::get('absen/show', [ShowAttendenceController::class, 'index'])->name('absen');
 Route::get('absen/filter', [ShowAttendenceController::class, 'filter'])->name('absen-filter');
+
+Route::post('user/{id}', [UserController::class, 'store'])->name('user.store');
 
 Route::group(['prefix' => 'kantor'], function () {
     Route::get('', [OfficeController::class, 'index'])->name('kantor');
