@@ -7,6 +7,8 @@ use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\AttendenceController;
+use App\Http\Controllers\InsuranceController;
+use App\Http\Controllers\PayrollController;
 use App\Http\Controllers\ShowAttendenceController;
 use App\Http\Controllers\UserController;
 
@@ -28,6 +30,7 @@ Route::get('/presensi', function () {
     return view('pages.user.attendance');
 });
 
+
 Route::get('absen', [AttendenceController::class, 'index'])->name('absen');
 Route::post('absen/store', [AttendenceController::class, 'checkin'])->name('checkin');
 Route::post('absen/update', [AttendenceController::class, 'checkout'])->name('checkout');
@@ -36,12 +39,25 @@ Route::get('absen/filter', [ShowAttendenceController::class, 'filter'])->name('a
 
 Route::post('user/{id}', [UserController::class, 'store'])->name('user.store');
 
+Route::group(['prefix' => 'asuransi'], function () {
+    Route::get('', [InsuranceController::class, 'index'])->name('asuransi');
+    Route::post('store', [InsuranceController::class, 'store'])->name('asuransi.store');
+    Route::put('update/{id}', [InsuranceController::class, 'update'])->name('asuransi.update');
+    Route::delete('destroy/{id}', [InsuranceController::class, 'destroy'])->name('asuransi.destroy');
+});
+
 Route::group(['prefix' => 'kantor'], function () {
     Route::get('', [OfficeController::class, 'index'])->name('kantor');
     Route::get('create', [OfficeController::class, 'create'])->name('kantor.create');
     Route::post('store', [OfficeController::class, 'store'])->name('kantor.store');
     Route::get('edit/{id}', [OfficeController::class, 'edit'])->name('kantor.edit');
     Route::put('edit/{id}', [OfficeController::class, 'update'])->name('kantor.update');
+});
+
+Route::group(['prefix' => 'gaji'], function () {
+    Route::get('', [PayrollController::class, 'index'])->name('gaji');
+    Route::get('{id}', [PayrollController::class, 'create'])->name('gaji.create');
+    Route::post('store/{id}', [PayrollController::class, 'store'])->name('gaji.store');
 });
 
 Route::group(['prefix' => 'karyawan'], function () {

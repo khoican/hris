@@ -24,6 +24,7 @@
                     <li><a href="/kantor" class="nav-link text-white rounded">Profil Kantor</a></li>
                     <li><a href="/divisi" class="nav-link text-white rounded">Divisi</a></li>
                     <li><a href="/jabatan" class="nav-link text-white rounded">Jabatan</a></li>
+                    <li><a href="/asuransi" class="nav-link text-white rounded">Asuransi</a></li>
                 </ul>
             </div>
         </li>
@@ -38,7 +39,7 @@
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link text-white">
+            <a href="/gaji" class="nav-link text-white">
                 Manajemen Gaji
             </a>
         </li>

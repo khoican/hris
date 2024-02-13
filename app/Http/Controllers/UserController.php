@@ -13,11 +13,21 @@ class UserController extends Controller
         $employee = Employee::find($id);
         $username = strtolower(str_replace(' ', '', $employee->name));
 
-        User::create([
-            'employee_id' => $employee->id,
-            'name' => $username,
-            'password' => bcrypt($username)
-        ]);
+        if (strtolower($employee->position->division->name) == 'human resources') {
+            User::create([
+                'employee_id' => $employee->id,
+                'name' => $username,
+                'password' => bcrypt($username),
+                'role' => 'admin'
+            ]);
+        } else {
+            User::create([
+                'employee_id' => $employee->id,
+                'name' => $username,
+                'password' => bcrypt($username),
+                'role' => 'user'
+            ]);
+        }
 
         return back()->with('success', 'Berhasil Menambah Data User');
     }

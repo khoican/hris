@@ -41,4 +41,18 @@ class Employee extends Model
         $month = $month ?? Carbon::now()->month;
         return $this->attendance()->where('employee_id', $employee_id)->whereNull('check_in')->whereYear('date', $year)->whereMonth('date', $month)->count();
     }
+
+    public function totalSalary($totalAttendanceDays)
+    {
+        $position = $this->position;
+
+        if ($position) {
+            $salaryPerHour = $position->salary_per_hour;
+            $totalSalary = $totalAttendanceDays * $salaryPerHour;
+
+            return  $totalSalary;
+        }
+
+        return 0;
+    }
 }
