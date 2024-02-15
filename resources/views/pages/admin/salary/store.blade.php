@@ -51,7 +51,6 @@
                 <h4 id="salary" class="text-danger fw-bold">Rp. 0</h4>
             </div>
             <div class="text-end">
-                <button type="" class="btn btn-success">Slip Gaji</button>
                 <button type="submit" class="btn btn-primary">Simpan dan Bayar</button>
             </div>
         </div>

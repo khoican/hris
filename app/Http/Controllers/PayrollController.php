@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Payroll;
 use App\Models\Employee;
 use App\Models\Position;
+use Barryvdh\DomPDF\PDF;
 use App\Models\Insurance;
-use App\Models\Payroll;
 use Illuminate\Http\Request;
 
 class PayrollController extends Controller
@@ -54,6 +55,19 @@ class PayrollController extends Controller
             'salary' => $salary
         ]);
 
-        return back()->with('success', 'Data berhasil ditambahkan, Silahkan Cetak Slip Gaji!');
+        return redirect('/gaji')->with('success', 'Data berhasil ditambahkan, Silahkan Cetak Slip Gaji!');
+    }
+
+    public function history()
+    {
+        $payrolls = Payroll::all();
+        return view('pages.admin.salary.history', compact('payrolls'));
+    }
+
+    public function generateReport($id)
+    {
+        $payroll = Payroll::find($id);
+        $pdf = app('dompdf.wrapper')->loadView('pages.admin.salary.report', compact('payroll'));
+        return $pdf->download('slip_gaji.pdf');
     }
 }
