@@ -26,9 +26,7 @@ use App\Http\Controllers\UserController;
 Route::get('/', function () {
     return view('pages.admin.dashboard');
 });
-Route::get('/presensi', function () {
-    return view('pages.user.attendance');
-});
+Route::get('/presensi',[AttendenceController::class, 'index'])->name('presensi');
 
 
 Route::get('absen', [AttendenceController::class, 'index'])->name('absen');

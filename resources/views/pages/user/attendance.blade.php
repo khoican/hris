@@ -41,6 +41,52 @@
     </div>
 </div>
 
+<div class="w-100 p-3 bg-white rounded-3 mt-5">
+
+    <table class="table">
+        <thead class="table-primary text-center">
+            <tr>
+                <th style="width: 10%;">No</th>
+                <th style="width: 20%;">Tanggal</th>
+                <th style="width: 20%;">Jam Masuk</th>
+                <th style="width: 20%;">Jam Keluar</th>
+                <th style="width: 30%;">Status</th>
+            </tr>
+        </thead>
+
+        <tbody class="text-center">
+            @foreach ($attendances as $attendance)
+            <tr>
+                <td class=" fw-bold">{{ $loop->iteration }}</td>
+                <td>{{ $attendance->date }}</td>
+                <td>{{ $attendance->check_in }}</td>
+                <td>{{ $attendance->check_out }}</td>
+                @if($attendance->check_in != null && $attendance->check_out == null)
+                <td class="">
+                    <p class="bg-success p-3 rounded text-white fw-bold">
+                        Masuk
+                    </p>
+                </td>
+                @elseif($attendance->check_in != null && $attendance->check_out != null)
+                <td class=" text-success">
+                    <p class="bg-success p-3 rounded text-white fw-bold">
+                        Masuk
+                    </p>
+                </td>
+                @elseif($attendance->check_in == null && $attendance->check_out != null)
+                <td class=" text-danger">
+                    <p class="bg-danger p-3 rounded text-white fw-bold">
+                        Tidak Masuk
+                    </p>
+                </td>
+                @endif
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+
+</div>
+
 <script>
     window.addEventListener('DOMContentLoaded', function() {
         function successCallback(position) {

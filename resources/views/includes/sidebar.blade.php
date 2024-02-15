@@ -5,9 +5,17 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-            <a href="/presensi" class="nav-link text-white" aria-current="page">
-                Home
-            </a>
+            <button class="nav-link text-white" data-bs-toggle="collapse" data-bs-target="#dashboard-home"
+                aria-expanded="false">
+                home
+            </button>
+            <div class="collapse" id="dashboard-home" style="">
+                <ul class="btn-toggle-nav list-unstyled fw-normal ps-3">
+                    <li><a href="/kantor" class="nav-link text-white rounded">Profil Karyawan</a></li>
+                    <li><a href="/presensi" class="nav-link text-white rounded">Presensi</a></li>
+                    <li><a href="/jabatan" class="nav-link text-white rounded">Riwayat Gaji</a></li>
+                </ul>
+            </div>
         </li>
         <li class="nav-item">
             <a href="/" class="nav-link active" aria-current="page">

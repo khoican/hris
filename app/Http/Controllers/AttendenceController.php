@@ -11,7 +11,9 @@ class AttendenceController extends Controller
 {
     public function index()
     {
-        return view('pages.user.attendance');
+        $attendances = Attendence::where('employee_id', 1)->paginate(10);
+
+        return view('pages.user.attendance', compact('attendances',));
     }
 
     private function harvesine($userLatitude, $userLongitude)
