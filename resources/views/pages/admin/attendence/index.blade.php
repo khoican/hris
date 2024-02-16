@@ -4,36 +4,41 @@
 <h1 class="fw-bold fs-3">Absensi</h1>
 
 <div class="w-100 p-3 bg-white rounded-3 mt-5 shadow">
-    <div class="dropdown text-end">
-        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Filter
-        </button>
-        <ul class="dropdown-menu p-3 bg-white">
-            <div class="mb-3">
-                <label for="year">Tahun</label>
-                <select id="year" name="year" class="form-select bg-white">
-                    @php
-                    $currentYear = date("Y");
-                    $startYear = 2020;
-                    @endphp
-                    @for ($year = $currentYear; $year >= $startYear; $year--)
-                    <option value="{{ $year }}">{{ $year }}</option>
-                    @endfor
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="month">Tahun</label>
-                <select id="month" name="month" class="form-select bg-white">
-                    @php
-                    $monthArray = ['Pilih Bulan', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli',
-                    'Agustus', 'September', 'Oktober', 'Nobermber', 'Desember']
-                    @endphp
-                    @for ($month = 0; $month < count($monthArray); $month++) <option value="{{ $month }}">{{
-                        $monthArray[$month] }}</option>
+    <div class="d-flex justify-content-between">
+        <a href="" class="btn btn-success">Laporan</a>
+
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Filter
+            </button>
+            <ul class="dropdown-menu p-3 bg-white">
+                <div class="mb-3">
+                    <label for="year">Tahun</label>
+                    <select id="year" name="year" class="form-select bg-white">
+                        @php
+                        $currentYear = date("Y");
+                        $startYear = 2020;
+                        @endphp
+                        @for ($year = $currentYear; $year >= $startYear; $year--)
+                        <option value="{{ $year }}">{{ $year }}</option>
                         @endfor
-                </select>
-            </div>
-        </ul>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="month">Tahun</label>
+                    <select id="month" name="month" class="form-select bg-white">
+                        @php
+                        $monthArray = ['Pilih Bulan', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli',
+                        'Agustus', 'September', 'Oktober', 'Nobermber', 'Desember']
+                        @endphp
+                        @for ($month = 0; $month < count($monthArray); $month++) <option value="{{ $month }}">{{
+                            $monthArray[$month] }}</option>
+                            @endfor
+                    </select>
+                </div>
+            </ul>
+        </div>
     </div>
 
     <table class="table rounded mb-0 mt-3">

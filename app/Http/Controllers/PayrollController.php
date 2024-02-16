@@ -58,16 +58,20 @@ class PayrollController extends Controller
         return redirect('/gaji')->with('success', 'Data berhasil ditambahkan, Silahkan Cetak Slip Gaji!');
     }
 
+    public function generateReport($id)
+    {
+        $payroll = Payroll::find($id);
+        $pdf = app('dompdf.wrapper')->loadView('pages.admin.salary.report', compact('payroll'));
+        return $pdf->download('slip_gaji.pdf');
+    }
+
     public function history()
     {
         $payrolls = Payroll::all();
         return view('pages.admin.salary.history', compact('payrolls'));
     }
 
-    public function generateReport($id)
+    public function payrollByUser()
     {
-        $payroll = Payroll::find($id);
-        $pdf = app('dompdf.wrapper')->loadView('pages.admin.salary.report', compact('payroll'));
-        return $pdf->download('slip_gaji.pdf');
     }
 }

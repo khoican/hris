@@ -11,7 +11,7 @@ class AttendenceController extends Controller
 {
     public function index()
     {
-        $attendances = Attendence::where('employee_id', 1)->paginate(10);
+        $attendances = Attendence::where('employee_id', 1)->latest()->paginate(10);
 
         return view('pages.user.attendance', compact('attendances',));
     }
