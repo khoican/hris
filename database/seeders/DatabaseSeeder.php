@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
             DivisionSeeder::class,
             PositionSeeder::class,
             EmployeeSeeder::class,
-            AttendenceSeeder::class,
+            UserSeeder::class,
+            // AttendenceSeeder::class,
         ]);
     }
 }
