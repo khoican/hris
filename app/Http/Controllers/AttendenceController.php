@@ -53,7 +53,7 @@ class AttendenceController extends Controller
 
         if ($distance <= 50) {
 
-            $employee_id = 1;
+            $employee_id = Auth::user()->employee_id;;
 
             $existingAttendance = Attendence::where('employee_id', $employee_id)->whereDate('created_at', Carbon::today())->first();
 
@@ -82,7 +82,7 @@ class AttendenceController extends Controller
 
         if ($distance <= 50) {
 
-            $employee_id = 1;
+            $employee_id = Auth::user()->employee_id;;
 
             $existingCheckIn = Attendence::where('employee_id', $employee_id)->whereDate('check_in', Carbon::today())->first();
 
