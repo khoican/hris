@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PayrollExport;
 use App\Models\Payroll;
 use App\Models\Employee;
 use App\Models\Position;
 use Barryvdh\DomPDF\PDF;
 use App\Models\Insurance;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PayrollController extends Controller
 {
@@ -73,5 +75,10 @@ class PayrollController extends Controller
 
     public function payrollByUser()
     {
+    }
+
+    public function generateExcel()
+    {
+        return Excel::download(new PayrollExport, 'payroll.xlsx');
     }
 }

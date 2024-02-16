@@ -4,6 +4,8 @@
 <h1 class="fw-bold fs-3">Riwayat Gaji</h1>
 
 <div class="w-100 p-3 bg-white rounded-3 mt-5 shadow">
+    <a href="{{ route('gaji.report') }}" class="btn btn-success">Laporan Gaji</a>
+
     <table class="table rounded mb-0 mt-3">
         <thead class="table-primary">
             <tr class="text-center">

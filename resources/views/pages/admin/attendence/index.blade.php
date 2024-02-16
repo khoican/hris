@@ -5,7 +5,7 @@
 
 <div class="w-100 p-3 bg-white rounded-3 mt-5 shadow">
     <div class="d-flex justify-content-between">
-        <a href="" class="btn btn-success">Laporan</a>
+        <a href="{{ route('absen.report')}}" class="btn btn-success">Laporan</a>
 
         <div class="dropdown">
             <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"

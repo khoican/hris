@@ -26,7 +26,7 @@ use App\Http\Controllers\UserController;
 Route::get('/', function () {
     return view('pages.admin.dashboard');
 });
-Route::get('/presensi',[AttendenceController::class, 'index'])->name('presensi');
+Route::get('/presensi', [AttendenceController::class, 'index'])->name('presensi');
 
 
 Route::get('absen', [AttendenceController::class, 'index'])->name('absen');
@@ -34,6 +34,7 @@ Route::post('absen/store', [AttendenceController::class, 'checkin'])->name('chec
 Route::post('absen/update', [AttendenceController::class, 'checkout'])->name('checkout');
 Route::get('absen/show', [ShowAttendenceController::class, 'index'])->name('absen');
 Route::get('absen/filter', [ShowAttendenceController::class, 'filter'])->name('absen-filter');
+Route::get('/report', [ShowAttendenceController::class, 'generateExcel'])->name('absen.report');
 
 Route::post('user/{id}', [UserController::class, 'store'])->name('user.store');
 
@@ -55,6 +56,7 @@ Route::group(['prefix' => 'kantor'], function () {
 Route::group(['prefix' => 'gaji'], function () {
     Route::get('', [PayrollController::class, 'index'])->name('gaji');
     Route::get('riwayat', [PayrollController::class, 'history'])->name('gaji.riwayat');
+    Route::get('report', [PayrollController::class, 'generateExcel'])->name('gaji.report');
     Route::get('{id}', [PayrollController::class, 'create'])->name('gaji.create');
     Route::post('store/{id}', [PayrollController::class, 'store'])->name('gaji.store');
     Route::get('{id}/generate-report', [PayrollController::class, 'generateReport'])->name('gaji.generate');
