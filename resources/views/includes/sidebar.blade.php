@@ -12,9 +12,9 @@
             </button>
             <div class="collapse" id="dashboard-home" style="">
                 <ul class="btn-toggle-nav list-unstyled fw-normal ps-3">
-                    <li><a href="/kantor" class="nav-link text-white rounded">Profil Karyawan</a></li>
-                    <li><a href="/presensi" class="nav-link text-white rounded">Presensi</a></li>
-                    <li><a href="/jabatan" class="nav-link text-white rounded">Riwayat Gaji</a></li>
+                    <li><a href="{{ route('profil')}}" class="nav-link text-white rounded">Profil Karyawan</a></li>
+                    <li><a href="{{ route('presensi')}}" class="nav-link text-white rounded">Presensi</a></li>
+                    <li><a href="{{ route('riwayat.gaji')}}" class="nav-link text-white rounded">Riwayat Gaji</a></li>
                 </ul>
             </div>
         </li>

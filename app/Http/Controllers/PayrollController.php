@@ -75,6 +75,10 @@ class PayrollController extends Controller
 
     public function payrollByUser()
     {
+        $id = Auth()->user()->id;
+        $payrolls = Payroll::where('employee_id', $id)->get();
+
+        return view('pages.user.salary', compact('payrolls'));
     }
 
     public function generateExcel()

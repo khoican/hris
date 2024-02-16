@@ -29,13 +29,14 @@ Route::get('logout', [UserController::class, 'logout'])->name('user.logout');
 
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/presensi', [AttendenceController::class, 'index'])->name('presensi');
-
-    Route::get('{id}/generate-report', [PayrollController::class, 'generateReport'])->name('gaji.slip');
-    Route::get('', [AttendenceController::class, 'index'])->name('absen');
+    Route::get('/', [AttendenceController::class, 'index'])->name('presensi');
+    Route::get('profil', [EmployeeController::class, 'show'])->name('profil');
+    Route::get('riwayat-gaji', [PayrollController::class, 'payrollByUser'])->name('riwayat.gaji');
+    Route::get('riwayat-gaji/{id}/generate-report', [PayrollController::class, 'generateReport'])->name('gaji.slip');
 
     Route::post('absen/store', [AttendenceController::class, 'checkin'])->name('checkin');
     Route::post('absen/update', [AttendenceController::class, 'checkout'])->name('checkout');
+
 
     Route::group(['middleware' => ['cek_login:admin']], function () {
         Route::get('admin', function () {
@@ -69,7 +70,6 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('report', [PayrollController::class, 'generateExcel'])->name('gaji.report');
             Route::get('{id}', [PayrollController::class, 'create'])->name('gaji.create');
             Route::post('store/{id}', [PayrollController::class, 'store'])->name('gaji.store');
-            Route::get('{id}/generate-report', [PayrollController::class, 'generateReport'])->name('gaji.slip');
         });
 
         Route::group(['prefix' => 'karyawan'], function () {

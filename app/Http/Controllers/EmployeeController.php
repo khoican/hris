@@ -18,6 +18,15 @@ class EmployeeController extends Controller
         return view('pages.admin.employee.index', compact('employees', 'users'));
     }
 
+    public function show()
+    {
+        $id = Auth()->user()->id;
+
+        $employee = Employee::find($id);
+
+        return view('pages.user.profile', compact('employee'));
+    }
+
     public function create()
     {
         $positions = Position::latest()->get();
