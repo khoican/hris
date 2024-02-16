@@ -3,8 +3,9 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Mini HRIS</title>
 
-@vite(['resources/sass/app.scss', 'resources/js/app.js'])
+<link rel="stylesheet" href="{{ asset('build/assets/app-vVrFDlwe.css') }}">
 
+<script src="{{ asset('build/assets/app-Y_MuImAH.js')}}"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>

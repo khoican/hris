@@ -17,7 +17,7 @@ class cek_login
     public function handle(Request $request, Closure $next, $roles): Response
     {
         if (!Auth::check()) {
-            return redirect('login');
+            return redirect('user.login');
         }
 
         $user = Auth::user();
@@ -26,6 +26,6 @@ class cek_login
             return $next($request);
         }
 
-        return redirect('login')->with('status', 'Login Gagal');
+        return redirect('user.login')->with('status', 'Login Gagal');
     }
 }
