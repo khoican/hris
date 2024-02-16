@@ -54,8 +54,8 @@
                 Manajemen Gaji
             </a>
         </li>
+        @endif
     </ul>
-    @endif
     <hr>
     <div class="dropdown">
         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1"
