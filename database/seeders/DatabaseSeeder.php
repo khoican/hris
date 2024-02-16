@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             DivisionSeeder::class,
             PositionSeeder::class,
-            EmployeeSeeder::class,
+            // EmployeeSeeder::class,
             UserSeeder::class,
             // AttendenceSeeder::class,
         ]);

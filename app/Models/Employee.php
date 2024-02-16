@@ -35,6 +35,14 @@ class Employee extends Model
         return $this->attendance()->where('employee_id', $employee_id)->whereNotNull('check_in')->whereYear('date', $year)->whereMonth('date', $month)->count();
     }
 
+    public function totalAttendanceDay($employee_id, $year = null, $month = null, $day = null)
+    {
+        $year = $year ?? Carbon::now()->year;
+        $month = $month ?? Carbon::now()->month;
+        $day = $day ?? Carbon::now()->day;
+        return $this->attendance()->where('employee_id', $employee_id)->whereNotNull('check_in')->whereYear('date', $year)->whereMonth('date', $month)->whereDate('date', $day)->count();
+    }
+
     public function totalAbsenceDays($employee_id, $year = null, $month = null)
     {
         $year = $year ?? Carbon::now()->year;

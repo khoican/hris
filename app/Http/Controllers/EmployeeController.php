@@ -7,6 +7,7 @@ use App\Models\Employee;
 use App\Models\Position;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EmployeeController extends Controller
 {
@@ -20,7 +21,7 @@ class EmployeeController extends Controller
 
     public function show()
     {
-        $id = Auth()->user()->id;
+        $id = Auth::user()->employee_id;
 
         $employee = Employee::find($id);
 

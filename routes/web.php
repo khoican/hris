@@ -7,6 +7,7 @@ use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\AttendenceController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InsuranceController;
 use App\Http\Controllers\PayrollController;
 use App\Http\Controllers\ShowAttendenceController;
@@ -34,14 +35,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('riwayat-gaji', [PayrollController::class, 'payrollByUser'])->name('riwayat.gaji');
     Route::get('riwayat-gaji/{id}/generate-report', [PayrollController::class, 'generateReport'])->name('gaji.slip');
 
-    Route::post('absen/store', [AttendenceController::class, 'checkin'])->name('checkin');
-    Route::post('absen/update', [AttendenceController::class, 'checkout'])->name('checkout');
+    Route::group(['prefix' => 'presensi'], function () {
+        Route::post('absen/store', [AttendenceController::class, 'checkin'])->name('checkin');
+        Route::post('absen/update', [AttendenceController::class, 'checkout'])->name('checkout');
+    });
 
 
     Route::group(['middleware' => ['cek_login:admin']], function () {
-        Route::get('admin', function () {
-            return view('pages.admin.dashboard');
-        });
+        Route::get('admin', [DashboardController::class, 'index'])->name('dashboard');
 
         Route::group(['prefix' => 'absensi'], function () {
             Route::get('/show', [ShowAttendenceController::class, 'index'])->name('absen.show');
