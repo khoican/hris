@@ -6,12 +6,15 @@ use App\Models\Attendence;
 use App\Models\Office;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AttendenceController extends Controller
 {
     public function index()
     {
-        $attendances = Attendence::where('employee_id', 1)->latest()->paginate(10);
+        $id = Auth::user()->employee_id;
+
+        $attendances = Attendence::where('employee_id', $id)->latest()->paginate(10);
 
         return view('pages.user.attendance', compact('attendances',));
     }
