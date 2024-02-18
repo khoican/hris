@@ -6,7 +6,7 @@ use App\Exports\PayrollExport;
 use App\Models\Payroll;
 use App\Models\Employee;
 use App\Models\Position;
-use Barryvdh\DomPDF\PDF;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use App\Models\Insurance;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -63,7 +63,12 @@ class PayrollController extends Controller
     public function generateReport($id)
     {
         $payroll = Payroll::find($id);
-        $pdf = app('dompdf.wrapper')->loadView('pages.admin.salary.report', compact('payroll'));
+
+        $data = [
+            'payroll' => $payroll
+        ];
+
+        $pdf = app('dompdf.wrapper')->loadView('pages.admin.salary.report', $data)->setPaper('a4', 'portrait');
         return $pdf->download('slip_gaji.pdf');
     }
 
@@ -75,7 +80,7 @@ class PayrollController extends Controller
 
     public function payrollByUser()
     {
-        $id = Auth()->user()->id;
+        $id = Auth()->user()->employee_id;
         $payrolls = Payroll::where('employee_id', $id)->get();
 
         return view('pages.user.salary', compact('payrolls'));

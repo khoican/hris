@@ -33,7 +33,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/', [AttendenceController::class, 'index'])->name('presensi');
     Route::get('profil', [EmployeeController::class, 'show'])->name('profil');
     Route::get('riwayat-gaji', [PayrollController::class, 'payrollByUser'])->name('riwayat.gaji');
-    Route::get('riwayat-gaji/{id}/generate-report', [PayrollController::class, 'generateReport'])->name('gaji.slip');
+    Route::get('slip/{id}', [PayrollController::class, 'generateReport'])->name('gaji.slip');
 
     Route::group(['prefix' => 'presensi'], function () {
         Route::post('absen/store', [AttendenceController::class, 'checkin'])->name('checkin');
@@ -71,6 +71,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('report', [PayrollController::class, 'generateExcel'])->name('gaji.report');
             Route::get('{id}', [PayrollController::class, 'create'])->name('gaji.create');
             Route::post('store/{id}', [PayrollController::class, 'store'])->name('gaji.store');
+            Route::get('/slip/{id}', [PayrollController::class, 'generateReport'])->name('gaji.generate');
         });
 
         Route::group(['prefix' => 'karyawan'], function () {

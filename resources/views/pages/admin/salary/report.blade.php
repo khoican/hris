@@ -2,7 +2,8 @@
 <html lang="en">
 
 <head>
-    @include('includes.head')
+    <meta charset="UTF-8">
+    <title>Slip Gaji</title>
 </head>
 
 <body>
@@ -39,7 +40,7 @@
                 <tr>
                     <td class="fw-bold" style="width: 40%">Biaya Asuransi</td>
                     <td class="text-center" style="width: 10%">:</td>
-                    <td style="width: 50">{{ $payroll->insurance_cost }}</td>
+                    <td style="width: 50%">{{ $payroll->insurance_cost }}</td>
                 </tr>
                 <tr>
                     <td class="fw-bold" style="width: 40%">Pinjaman</td>
